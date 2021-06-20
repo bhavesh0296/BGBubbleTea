@@ -46,6 +46,7 @@ class FilterViewController: UITableViewController {
         populateCheapVenueCountLabel()
         populateModerateVenueCountLabel()
         populateExpensiveVenueCountLabel()
+        populateDealsCounterLabel()
     }
 
     @IBAction func cancelBarButtonClicked(_ sender: UIBarButtonItem) {
@@ -102,6 +103,30 @@ extension FilterViewController {
             let pluralized = count == 1 ? "place" : "places"
             thirdPriceCategoryLabel.text = "\(count) Bubble tea \(pluralized)"
         }catch {
+            print(error.localizedDescription)
+        }
+    }
+
+    fileprivate func populateDealsCounterLabel() {
+        let fetchRequest = NSFetchRequest<NSDictionary>(entityName: String(describing: Venue.self))
+        fetchRequest.resultType = .dictionaryResultType
+
+        let sumExpressionDesc = NSExpressionDescription()
+        sumExpressionDesc.name = "sumDeals"
+
+        let specialCountExp = NSExpression(format: #keyPath(Venue.specialCount))
+        sumExpressionDesc.expression = NSExpression(forFunction: "sum:", arguments: [specialCountExp])
+        sumExpressionDesc.expressionResultType = .integer32AttributeType
+
+        fetchRequest.propertiesToFetch = [sumExpressionDesc]
+
+        do {
+            let results = try coreDataStack.managedContext.fetch(fetchRequest)
+            let resultDict = results.first!
+            let numDeals = resultDict["sumDeals"] as! Int
+            let pluralized = numDeals == 1 ? "deal" : "deals"
+            numDealsLabel.text = "\(numDeals) \(pluralized)"
+        } catch {
             print(error.localizedDescription)
         }
     }

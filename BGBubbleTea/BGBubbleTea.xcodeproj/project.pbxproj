@@ -13,6 +13,21 @@
 		4066567D267F51360065500B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4066567B267F51360065500B /* Main.storyboard */; };
 		4066567F267F513B0065500B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4066567E267F513B0065500B /* Assets.xcassets */; };
 		40665682267F513B0065500B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 40665680267F513B0065500B /* LaunchScreen.storyboard */; };
+		4066568A267F519E0065500B /* FilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40665689267F519E0065500B /* FilterViewController.swift */; };
+		4066568C267F51A50065500B /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4066568B267F51A50065500B /* CoreDataStack.swift */; };
+		4066568E267F51C10065500B /* attribution.txt in Resources */ = {isa = PBXBuildFile; fileRef = 4066568D267F51C10065500B /* attribution.txt */; };
+		40665690267F51CA0065500B /* seed.json in Resources */ = {isa = PBXBuildFile; fileRef = 4066568F267F51CA0065500B /* seed.json */; };
+		40665693267F53150065500B /* BGBubbleTea.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 40665691267F53150065500B /* BGBubbleTea.xcdatamodeld */; };
+		4066569F267F56FF0065500B /* Stats+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40665695267F56FF0065500B /* Stats+CoreDataClass.swift */; };
+		406656A0267F56FF0065500B /* Stats+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40665696267F56FF0065500B /* Stats+CoreDataProperties.swift */; };
+		406656A1267F56FF0065500B /* Category+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40665697267F56FF0065500B /* Category+CoreDataClass.swift */; };
+		406656A2267F56FF0065500B /* Category+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40665698267F56FF0065500B /* Category+CoreDataProperties.swift */; };
+		406656A3267F56FF0065500B /* Venue+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40665699267F56FF0065500B /* Venue+CoreDataClass.swift */; };
+		406656A4267F56FF0065500B /* Venue+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4066569A267F56FF0065500B /* Venue+CoreDataProperties.swift */; };
+		406656A5267F56FF0065500B /* PriceInfo+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4066569B267F56FF0065500B /* PriceInfo+CoreDataClass.swift */; };
+		406656A6267F56FF0065500B /* PriceInfo+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4066569C267F56FF0065500B /* PriceInfo+CoreDataProperties.swift */; };
+		406656AB267F5C210065500B /* Location+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 406656A9267F5C210065500B /* Location+CoreDataClass.swift */; };
+		406656AC267F5C210065500B /* Location+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 406656AA267F5C210065500B /* Location+CoreDataProperties.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +39,21 @@
 		4066567E267F513B0065500B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		40665681267F513B0065500B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		40665683267F513B0065500B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		40665689267F519E0065500B /* FilterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterViewController.swift; sourceTree = "<group>"; };
+		4066568B267F51A50065500B /* CoreDataStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
+		4066568D267F51C10065500B /* attribution.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = attribution.txt; sourceTree = "<group>"; };
+		4066568F267F51CA0065500B /* seed.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = seed.json; sourceTree = "<group>"; };
+		40665692267F53150065500B /* BGBubbleTea.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = BGBubbleTea.xcdatamodel; sourceTree = "<group>"; };
+		40665695267F56FF0065500B /* Stats+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Stats+CoreDataClass.swift"; sourceTree = "<group>"; };
+		40665696267F56FF0065500B /* Stats+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Stats+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		40665697267F56FF0065500B /* Category+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Category+CoreDataClass.swift"; sourceTree = "<group>"; };
+		40665698267F56FF0065500B /* Category+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Category+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		40665699267F56FF0065500B /* Venue+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Venue+CoreDataClass.swift"; sourceTree = "<group>"; };
+		4066569A267F56FF0065500B /* Venue+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Venue+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		4066569B267F56FF0065500B /* PriceInfo+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PriceInfo+CoreDataClass.swift"; sourceTree = "<group>"; };
+		4066569C267F56FF0065500B /* PriceInfo+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PriceInfo+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		406656A9267F5C210065500B /* Location+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Location+CoreDataClass.swift"; sourceTree = "<group>"; };
+		406656AA267F5C210065500B /* Location+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Location+CoreDataProperties.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,15 +86,38 @@
 		40665674267F51350065500B /* BGBubbleTea */ = {
 			isa = PBXGroup;
 			children = (
+				40665694267F56CA0065500B /* NSManagedObject */,
 				40665675267F51350065500B /* AppDelegate.swift */,
 				40665677267F51360065500B /* SceneDelegate.swift */,
 				40665679267F51360065500B /* ViewController.swift */,
+				40665689267F519E0065500B /* FilterViewController.swift */,
+				4066568B267F51A50065500B /* CoreDataStack.swift */,
 				4066567B267F51360065500B /* Main.storyboard */,
+				4066568F267F51CA0065500B /* seed.json */,
+				40665691267F53150065500B /* BGBubbleTea.xcdatamodeld */,
 				4066567E267F513B0065500B /* Assets.xcassets */,
+				4066568D267F51C10065500B /* attribution.txt */,
 				40665680267F513B0065500B /* LaunchScreen.storyboard */,
 				40665683267F513B0065500B /* Info.plist */,
 			);
 			path = BGBubbleTea;
+			sourceTree = "<group>";
+		};
+		40665694267F56CA0065500B /* NSManagedObject */ = {
+			isa = PBXGroup;
+			children = (
+				406656A9267F5C210065500B /* Location+CoreDataClass.swift */,
+				406656AA267F5C210065500B /* Location+CoreDataProperties.swift */,
+				40665695267F56FF0065500B /* Stats+CoreDataClass.swift */,
+				40665696267F56FF0065500B /* Stats+CoreDataProperties.swift */,
+				40665699267F56FF0065500B /* Venue+CoreDataClass.swift */,
+				4066569A267F56FF0065500B /* Venue+CoreDataProperties.swift */,
+				4066569B267F56FF0065500B /* PriceInfo+CoreDataClass.swift */,
+				4066569C267F56FF0065500B /* PriceInfo+CoreDataProperties.swift */,
+				40665697267F56FF0065500B /* Category+CoreDataClass.swift */,
+				40665698267F56FF0065500B /* Category+CoreDataProperties.swift */,
+			);
+			path = NSManagedObject;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -125,8 +178,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				40665690267F51CA0065500B /* seed.json in Resources */,
 				40665682267F513B0065500B /* LaunchScreen.storyboard in Resources */,
 				4066567F267F513B0065500B /* Assets.xcassets in Resources */,
+				4066568E267F51C10065500B /* attribution.txt in Resources */,
 				4066567D267F51360065500B /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -138,9 +193,22 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				406656AC267F5C210065500B /* Location+CoreDataProperties.swift in Sources */,
+				406656A5267F56FF0065500B /* PriceInfo+CoreDataClass.swift in Sources */,
+				4066568C267F51A50065500B /* CoreDataStack.swift in Sources */,
+				4066569F267F56FF0065500B /* Stats+CoreDataClass.swift in Sources */,
+				406656AB267F5C210065500B /* Location+CoreDataClass.swift in Sources */,
+				406656A3267F56FF0065500B /* Venue+CoreDataClass.swift in Sources */,
+				40665693267F53150065500B /* BGBubbleTea.xcdatamodeld in Sources */,
+				406656A0267F56FF0065500B /* Stats+CoreDataProperties.swift in Sources */,
 				4066567A267F51360065500B /* ViewController.swift in Sources */,
 				40665676267F51350065500B /* AppDelegate.swift in Sources */,
+				4066568A267F519E0065500B /* FilterViewController.swift in Sources */,
+				406656A2267F56FF0065500B /* Category+CoreDataProperties.swift in Sources */,
+				406656A1267F56FF0065500B /* Category+CoreDataClass.swift in Sources */,
 				40665678267F51360065500B /* SceneDelegate.swift in Sources */,
+				406656A4267F56FF0065500B /* Venue+CoreDataProperties.swift in Sources */,
+				406656A6267F56FF0065500B /* PriceInfo+CoreDataProperties.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -338,6 +406,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		40665691267F53150065500B /* BGBubbleTea.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				40665692267F53150065500B /* BGBubbleTea.xcdatamodel */,
+			);
+			currentVersion = 40665692267F53150065500B /* BGBubbleTea.xcdatamodel */;
+			path = BGBubbleTea.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 4066566A267F51350065500B /* Project object */;
 }

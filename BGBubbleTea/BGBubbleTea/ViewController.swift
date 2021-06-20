@@ -14,7 +14,9 @@ class ViewController: UIViewController {
     // MARK: - Properties
     private let venueCellIdentifier = "VenueCell"
 
-    lazy var coreDataStack = CoreDataStack(modelName: "BubbleTeaFinder")
+    lazy var coreDataStack = CoreDataStack(modelName: "BGBubbleTea")
+    var fetchRequest: NSFetchRequest<Venue>?
+    var venues: [Venue] = []
 
     // MARK: - IBOutlets
     @IBOutlet weak var tableView: UITableView!
@@ -24,11 +26,29 @@ class ViewController: UIViewController {
         super.viewDidLoad()
 
         importJSONSeedDataIfNeeded()
+
+        guard let model = coreDataStack.managedContext.persistentStoreCoordinator?.managedObjectModel,
+            let fetchRequest = model.fetchRequestTemplate(forName: "FetchRequest") as? NSFetchRequest<Venue> else {
+                return
+        }
+        self.fetchRequest = fetchRequest
+        fetchAndReload()
     }
 
     @IBAction func filterBarButtonClicked(_ sender: UIBarButtonItem) {
         if let filterVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: String(describing: FilterViewController.self)) as? FilterViewController {
+            filterVC.coreDataStack = self.coreDataStack
             self.navigationController?.pushViewController(filterVC, animated: true)
+        }
+    }
+
+    fileprivate func fetchAndReload() {
+        guard let fetchRequest = fetchRequest else { return }
+        do {
+            venues = try coreDataStack.managedContext.fetch(fetchRequest)
+            tableView.reloadData()
+        } catch {
+            print(error.localizedDescription)
         }
     }
 
@@ -38,13 +58,14 @@ class ViewController: UIViewController {
 extension ViewController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return venues.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: venueCellIdentifier, for: indexPath)
-        cell.textLabel?.text = "Bubble Tea Venue"
-        cell.detailTextLabel?.text = "Price Info"
+        let venue = venues[indexPath.row]
+        cell.textLabel?.text = venue.name ?? ""
+        cell.detailTextLabel?.text = venue.priceInfo?.priceCategory
         return cell
     }
 }
@@ -108,7 +129,7 @@ extension ViewController {
             stats.checkinsCount = checkins!.int32Value
             let tipCount = statsDict["tipCount"] as? NSNumber
             stats.tipCount = tipCount!.int32Value
-
+            
             let venue = Venue(context: coreDataStack.managedContext)
             venue.name = venueName
             venue.phone = venuePhone

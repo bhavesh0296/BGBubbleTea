@@ -28,7 +28,6 @@ class ViewController: UIViewController {
 
         importJSONSeedDataIfNeeded()
 
-
         /*
          // to use the fetch request from the Managed Object Model
         guard let model = coreDataStack.managedContext.persistentStoreCoordinator?.managedObjectModel,

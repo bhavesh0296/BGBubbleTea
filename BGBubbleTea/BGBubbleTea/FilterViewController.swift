@@ -2,6 +2,10 @@
 import UIKit
 import CoreData
 
+protocol FilterViewControllerDelegate: class {
+    func filterViewController(filter: FilterViewController, didSelectPredicate predicate: NSPredicate?, sortDescriptor: NSSortDescriptor?)
+}
+
 class FilterViewController: UITableViewController {
 
     @IBOutlet weak var firstPriceCategoryLabel: UILabel!
@@ -27,6 +31,9 @@ class FilterViewController: UITableViewController {
 
     // MARK: - Properties
     var coreDataStack: CoreDataStack!
+    weak var delegate: FilterViewControllerDelegate?
+    var selectedSortDescriptor: NSSortDescriptor?
+    var selectedPredicate: NSPredicate?
 
     lazy var cheapVenuePredicate: NSPredicate = {
         return NSPredicate(format: "%K=%@", #keyPath(Venue.priceInfo.priceCategory), "$")
@@ -38,6 +45,18 @@ class FilterViewController: UITableViewController {
 
     lazy var expensiveVenuePredicate: NSPredicate = {
         return NSPredicate(format: "%K=%@", #keyPath(Venue.priceInfo.priceCategory), "$$$")
+    }()
+
+    lazy var offeringDealPredicate: NSPredicate = {
+        return NSPredicate(format: "%K > 0", #keyPath(Venue.specialCount))
+    }()
+
+    lazy var walkingDistancePredicate: NSPredicate = {
+        return NSPredicate(format: "%K < 1000", #keyPath(Venue.location.distance))
+    }()
+
+    lazy var hasUserTipPredicate: NSPredicate = {
+        return NSPredicate(format: "%K > 0", #keyPath(Venue.stats.tipCount))
     }()
 
     // MARK: - View Life Cycle
@@ -54,15 +73,12 @@ class FilterViewController: UITableViewController {
     }
 
     @IBAction func searchBarButtonClicked(_ sender: UIBarButtonItem) {
-
-
+        delegate?.filterViewController(filter: self, didSelectPredicate: selectedPredicate, sortDescriptor: selectedSortDescriptor)
+        self.navigationController?.popViewController(animated: true)
     }
-
 
 }
 
-
-// MARK - UITableViewDelegate
 extension FilterViewController {
 
     fileprivate func populateCheapVenueCountLabel() {
@@ -131,7 +147,37 @@ extension FilterViewController {
         }
     }
 
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+}
 
+// MARK - UITableViewDelegate
+extension FilterViewController {
+
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let cell = tableView.cellForRow(at: indexPath)  else {
+            return
+        }
+
+        switch cell {
+
+        //Price Section
+        case cheapVenueCell:
+            selectedPredicate = cheapVenuePredicate
+        case moderateVenueCell:
+            selectedPredicate = moderateVenuePredicate
+        case expensiveVenueCell:
+            selectedPredicate = expensiveVenuePredicate
+
+        //Most Popular Section
+        case offeringDealCell:
+            selectedPredicate = offeringDealPredicate
+        case walkingDistanceCell:
+            selectedPredicate = walkingDistancePredicate
+        case userTipsCell:
+            selectedPredicate = hasUserTipPredicate
+
+        default: break
+        }
+
+        cell.accessoryType = .checkmark
     }
 }

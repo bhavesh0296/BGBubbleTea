@@ -27,17 +27,21 @@ class ViewController: UIViewController {
 
         importJSONSeedDataIfNeeded()
 
+        /*
         guard let model = coreDataStack.managedContext.persistentStoreCoordinator?.managedObjectModel,
             let fetchRequest = model.fetchRequestTemplate(forName: "FetchRequest") as? NSFetchRequest<Venue> else {
                 return
         }
         self.fetchRequest = fetchRequest
+        */
+        self.fetchRequest = Venue.fetchRequest()
         fetchAndReload()
     }
 
     @IBAction func filterBarButtonClicked(_ sender: UIBarButtonItem) {
         if let filterVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: String(describing: FilterViewController.self)) as? FilterViewController {
             filterVC.coreDataStack = self.coreDataStack
+            filterVC.delegate = self
             self.navigationController?.pushViewController(filterVC, animated: true)
         }
     }
@@ -142,4 +146,23 @@ extension ViewController {
 
         coreDataStack.saveContext()
     }
+}
+
+extension ViewController: FilterViewControllerDelegate {
+    func filterViewController(filter: FilterViewController, didSelectPredicate predicate: NSPredicate?, sortDescriptor: NSSortDescriptor?) {
+        guard let fetchRequest = fetchRequest else {
+            return
+        }
+
+        fetchRequest.predicate = nil
+        fetchRequest.sortDescriptors = nil
+
+        fetchRequest.predicate = predicate
+
+        if let sortDescriptor = sortDescriptor {
+            fetchRequest.sortDescriptors = [sortDescriptor]
+        }
+        fetchAndReload()
+    }
+
 }

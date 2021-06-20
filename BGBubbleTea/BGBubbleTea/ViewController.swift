@@ -17,6 +17,7 @@ class ViewController: UIViewController {
     lazy var coreDataStack = CoreDataStack(modelName: "BGBubbleTea")
     var fetchRequest: NSFetchRequest<Venue>?
     var venues: [Venue] = []
+    var asyncFetchRequest: NSAsynchronousFetchRequest<Venue>?
 
     // MARK: - IBOutlets
     @IBOutlet weak var tableView: UITableView!
@@ -27,15 +28,45 @@ class ViewController: UIViewController {
 
         importJSONSeedDataIfNeeded()
 
+
         /*
+         // to use the fetch request from the Managed Object Model
         guard let model = coreDataStack.managedContext.persistentStoreCoordinator?.managedObjectModel,
             let fetchRequest = model.fetchRequestTemplate(forName: "FetchRequest") as? NSFetchRequest<Venue> else {
                 return
         }
         self.fetchRequest = fetchRequest
         */
+
+        /*
+         // to get the fetch request from the Venue NSManagedObject
         self.fetchRequest = Venue.fetchRequest()
         fetchAndReload()
+        */
+
+        // example of batch update used when we have thousands of data to update
+        batchUpdateMarkFavorite()
+
+        // Asynchronous fetching without blocking the main thread
+        let venueFetchRequest: NSFetchRequest<Venue> = Venue.fetchRequest()
+        fetchRequest = venueFetchRequest
+
+        asyncFetchRequest = NSAsynchronousFetchRequest<Venue>(fetchRequest: venueFetchRequest, completionBlock: { [unowned self] (result: NSAsynchronousFetchResult) in
+            guard let venues = result.finalResult else {
+                return
+            }
+            self.venues = venues
+            self.tableView.reloadData()
+        })
+
+        do {
+            guard let asyncFetchRequest = asyncFetchRequest else {
+                return
+            }
+            try coreDataStack.managedContext.execute(asyncFetchRequest)
+        } catch {
+            print(error.localizedDescription)
+        }
     }
 
     @IBAction func filterBarButtonClicked(_ sender: UIBarButtonItem) {
@@ -56,6 +87,20 @@ class ViewController: UIViewController {
         }
     }
 
+    fileprivate func batchUpdateMarkFavorite() {
+        let batchUpdate = NSBatchUpdateRequest(entityName: String(describing: Venue.self))
+        batchUpdate.propertiesToUpdate = [#keyPath(Venue.favorite): true]
+
+        batchUpdate.affectedStores = coreDataStack.managedContext.persistentStoreCoordinator?.persistentStores
+        batchUpdate.resultType = .updatedObjectsCountResultType
+
+        do {
+            let batchResult = try coreDataStack.managedContext.execute(batchUpdate) as! NSBatchUpdateResult
+            print("Records Updated \(batchResult.result!)")
+        } catch {
+            print(error.localizedDescription)
+        }
+    }
 }
 
 // MARK: - UITableViewDataSource
